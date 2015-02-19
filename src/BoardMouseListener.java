@@ -12,18 +12,18 @@ public class BoardMouseListener implements MouseListener {
 	
 	public static String alphaBeta(int depth, int beta, int alpha, String move, int player) {
         //return in the form of 1234b##########
-        //String list=posibleMoves();
-        String list="1";
+        String list=possiblemoves();
+        //String list="1";
         if (depth==0 || list.length()==0) {
-        	return move+(rating());
-        	}//*(player*2-1));}
-        list="";
-        System.out.print("How many moves are there: ");
-        Scanner sc=new Scanner(System.in);
-        int temp=sc.nextInt();
-        for (int i=0;i<temp;i++) {
-            list+="1111b";
-        }
+        	return move+(rating()*(player*2-1));
+        	}
+        //list="";
+        //System.out.print("How many moves are there: ");
+        //Scanner sc=new Scanner(System.in);
+        //int temp=sc.nextInt();
+        //for (int i=0;i<temp;i++) {
+          //  list+="1111b";
+        //}
         //sort later
         player=1-player;//either 1 or 0
         for (int i=0;i<list.length();i+=5) {
@@ -184,6 +184,8 @@ public class BoardMouseListener implements MouseListener {
 		for (int i=0; i<32; i++){
 			int r= i/8;
 			int c= i%8;
+			System.out.println(r);
+			System.out.println(c);
 			if (Character.isUpperCase(chess.pieces[c][r].pieceletter.charAt(0)))
 			{
 				temp=chess.pieces[c][r].pieceletter.toLowerCase();
@@ -193,10 +195,10 @@ public class BoardMouseListener implements MouseListener {
 			}
 			if (Character.isUpperCase(chess.pieces[7-c][7-r].pieceletter.charAt(0)))
 			{
-				temp=chess.pieces[7-c][7-r].pieceletter.toLowerCase();
+				chess.pieces[c][r].pieceletter=chess.pieces[7-c][7-r].pieceletter.toLowerCase();
 			}
 			else{
-				temp=chess.pieces[7-c][7-r].pieceletter.toUpperCase();
+				chess.pieces[c][r].pieceletter=chess.pieces[7-c][7-r].pieceletter.toUpperCase();
 			}
 			/*if (chess.pieces[c][r].pieceletter=="k" || chess.pieces[c][r].pieceletter=="K"){
 				int kingtempy=c;
@@ -208,11 +210,11 @@ public class BoardMouseListener implements MouseListener {
 		
 	}
 public static void makemove(String moveinfo){
-		
-		posx=moveinfo.charAt(0);
-		posy=moveinfo.charAt(1);
-		posxfinal=moveinfo.charAt(2);
-		posyfinal=moveinfo.charAt(3);
+		int posx=Character.getNumericValue(moveinfo.charAt(0));
+		int posy=Character.getNumericValue(moveinfo.charAt(1));
+		int posxfinal=Character.getNumericValue(moveinfo.charAt(2));
+		int posyfinal=Character.getNumericValue(moveinfo.charAt(3));
+	
 		//conditional checking to see if it's the first turn so white moves first
 		if (whiteturn == true) {
 			//makes it so you can click and release on empty square without null pointer exception
@@ -232,7 +234,7 @@ public static void makemove(String moveinfo){
 					chess.theboard.repaint();
 					
 					String test= possiblemoves();
-					//System.out.println(test);
+					System.out.println(test);
 					
 				
 				}
@@ -243,6 +245,8 @@ public static void makemove(String moveinfo){
 			//makes it so user can click and release on empty square without null pointer exception
 			if (Math.abs(posxfinal - posx) != 0|| Math.abs(posyfinal - posy) != 0) {
 				//checks if piece can move
+				
+				
 				if (chess.pieces[posy][posx].canMove(posx, posy, posxfinal,posyfinal)) {
 					//changes position
 					chess.pieces[posyfinal][posxfinal] = chess.pieces[posy][posx];
@@ -434,7 +438,7 @@ public static void makemove(String moveinfo){
 			}
 		}
 			
-		System.out.println(alphaBeta(globaldepth,1000000,-1000000,"",0));
+		makemove(alphaBeta(globaldepth,1000000,-1000000,"",0));
 				
 	}
 
