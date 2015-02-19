@@ -14,14 +14,14 @@ public class Pawn extends Piece {
 		// movement conditionals for white pawns
 		if (chess.pieces[y][x].isWhite) {
 			// movement conditional for white pawn upon first movement
-			System.out.println("moved "+moved+","+x+","+y+","+finx+","+finy);
+			//System.out.println("moved "+moved+","+x+","+y+","+finx+","+finy);
 			if (y==6) {
 				// vertical movement
 				if (((x - finx) == 0) && ((y - finy) <= 2 && (y - finy) > 0)
 						&& chess.pieces[y - 1][x] == null
 						&& chess.pieces[finy][finx] == null) {
 					this.moved = true;
-					System.out.print("Pawn should move two spaces");
+					//System.out.print("Pawn should move two spaces");
 					return true;
 					// allows pawn to take piece of opposite color even if
 					// hasn't been moved yet
