@@ -12,7 +12,7 @@ public class Chess{
 	//tile array
 	BoardTile[][] boardTiles;
 	//piece array
-	public static Piece [][] pieces;
+	static Piece [][] pieces;
 	//defining of board component
 	BoardComponent theboard;
 	//defining of mouse listener
@@ -98,9 +98,7 @@ public class Chess{
 					}
 				
 			}
-			
 		}
-		//pieces[5][5]=new Knight (false,this);
 		//sets the windows visible and ends program if the window is closed
 		chess.setVisible(true);
 		chess.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

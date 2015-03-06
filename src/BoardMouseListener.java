@@ -1,18 +1,19 @@
-//import necessary libraries
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Scanner;
 
-public class BoardMouseListener implements MouseListener{
-    static int globaldepth=4;    //controlled depth, set to medium currently. Will determine diffuculty of AI.
-    public static Chess chess;
-    //position of mouse
-    public static int posx, posy, posxfinal, posyfinal;
-    //boolean so white always moves first
-    public static boolean whiteturn = true;
-    //using recursion to search and create tree
-    public static String alphaBeta(int depth, int beta, int alpha, String move, int player){
+public class BoardMouseListener implements MouseListener {
+	static Chess chess;
+	//position of mouse
+	public static int posx;
+	public static int posy;
+	public static int posxfinal;
+	public static int posyfinal;
+	public static int globaldepth=4;
+	//boolean so white always moves first
+	//static boolean whiteturn = true;
+	public static String alphaBeta(int depth, int beta, int alpha, String move, int player){
         String list=possiblemoves();
+        //System.out.println(list);
         //base case. Lets the program know what to do if it reaches the end of possible moves
         //or if there are no possible moves
         if (depth==0 || list.length()==0) {
@@ -23,6 +24,7 @@ public class BoardMouseListener implements MouseListener{
         //Go through every possible move
         for (int i=0;i<list.length();i+=5){
             //make a move
+        	//System.out.println(list.substring(i,i+5));
             makemove(list.substring(i,i+5));
             //flip the chess board to predict the human player's moves
             flipboard();
@@ -83,7 +85,8 @@ public class BoardMouseListener implements MouseListener{
                                 String jstring=Integer.toString(j);
                                 String kstring=Integer.toString(k);
                                 String lstring=Integer.toString(l);
-                                if (Chess.pieces[l][k]!=null){
+                                if (Chess.pieces[k][l]!=null){
+                                	System.out.println("There is a piece to be taken, "+chess.pieces[j][i].pieceletter+" at "+j+","+i+" takes "+chess.pieces[k][l].pieceletter+" at "+l+","+k);
                                     String newmove=jstring+istring+lstring+kstring+Chess.pieces[l][k].pieceletter;
                                     if (count<100){
                                         themoves+=newmove;
@@ -101,6 +104,7 @@ public class BoardMouseListener implements MouseListener{
                 }
             }
         }
+        
         return themoves;
     }
     public static int rating(){
@@ -109,25 +113,57 @@ public class BoardMouseListener implements MouseListener{
         return 0;
     }
     //flips the board
+    public static void postflip(int x, int y){
+    	Piece temp = null;
+    	temp=chess.pieces[y][x];
+    	chess.pieces[y][x]=chess.pieces[x][y];
+    	chess.pieces[x][y]=temp;
+    	
+    }
     public static void flipboard(){
+    	Piece temp = null;
         for (int i=0; i<32; i++){
             int r= i/8;
             int c= i%8;
-//			System.out.println(r);
-//			System.out.println(c);
-//			System.out.println(chess.pieces[c][r].pieceletter);
-            Piece temp=chess.pieces[c][r];
-            chess.pieces[c][r]=chess.pieces[7-c][7-r];
-            chess.pieces[7-c][7-r]=temp;
-            //if (Character.isUpperCase(chess.pieces[c][r].pieceletter.charAt(0)))
             if(chess.pieces[c][r]!=null){
-                if (chess.pieces[c][r].isWhite){
-                    chess.pieces[c][r].isWhite=false;
-                }
-                else{
-                    chess.pieces[c][r].isWhite=true;
-                }
+            	if (Character.isUpperCase(chess.pieces[c][r].pieceletter.charAt(0))){
+            		chess.pieces[c][r].pieceletter.toLowerCase();
+            		chess.pieces[c][r].isWhite=false;
+            		temp=chess.pieces[c][r];
+            	}
+            	else{
+            		chess.pieces[c][r].pieceletter.toUpperCase();
+            		chess.pieces[c][r].isWhite=true;
+            		temp=chess.pieces[c][r];
+            	}
             }
+            else{
+            	temp=chess.pieces[c][r];
+            }
+            if (chess.pieces[7-c][7-r]!=null){
+            	if (Character.isUpperCase(chess.pieces[7-c][7-r].pieceletter.charAt(0))){
+            		chess.pieces[7-c][7-r].pieceletter.toLowerCase();
+            		chess.pieces[7-c][7-r].isWhite=false;
+            		chess.pieces[c][r]=chess.pieces[7-c][7-r];
+            	}
+            	else{
+            		chess.pieces[7-c][7-r].pieceletter.toUpperCase();
+            		chess.pieces[7-c][7-r].isWhite=true;
+            		chess.pieces[c][r]=chess.pieces[7-c][7-r];
+            	
+            	}
+            	chess.pieces[7-c][7-r]=temp;
+            }
+            else{
+            	chess.pieces[c][r]=chess.pieces[7-c][7-r];
+            	chess.pieces[7-c][7-r]=temp;
+            	/*if (chess.pieces[c][r]!=null){
+            	System.out.println(chess.pieces[c][r]+" at "+c+","+r+" turned to null");
+            	}*/
+            	
+            }
+          
+            
         }
     }
     public static void makemove(String moveinfo){
@@ -137,48 +173,58 @@ public class BoardMouseListener implements MouseListener{
         int posyfinal=Character.getNumericValue(moveinfo.charAt(3));
 
         //conditional checking to see if it's the first turn so white moves first
-        if (whiteturn == true) {
+        //if (whiteturn == true) {
             //makes it so you can click and release on empty square without null pointer exception
-            if (Math.abs(posxfinal - posx) != 0|| Math.abs(posyfinal - posy) != 0) {
+            if (/*chess.pieces[posy][posx]!=null &&*/ (Math.abs(posxfinal - posx) != 0|| Math.abs(posyfinal - posy) != 0)) {
                 //checks to see if piece can move based on initial and final coordinates, this version also only allows white to move since it is the first turn
-                if (chess.pieces[posy][posx].canMove(posx, posy, posxfinal,posyfinal)&& chess.pieces[posy][posx].isWhite == true) {
+            	//System.out.println(chess.pieces[posy][posx].pieceletter+" "+posy+" "+posx+" "+posyfinal+" "+posxfinal);
+                if (chess.pieces[posy][posx]!=null && chess.pieces[posy][posx].canMove(posx, posy, posxfinal,posyfinal)/*&& chess.pieces[posy][posx].isWhite == true*/) {
                     //moves piece
+                	if (chess.pieces[posyfinal][posxfinal]!=null){
+                		System.out.println(chess.pieces[posyfinal][posxfinal].pieceletter+" at "+posyfinal+","+posxfinal+ " is killed by "+chess.pieces[posy][posx].pieceletter+" at "+posy+","+posx);
+                	}
                     chess.pieces[posyfinal][posxfinal] = chess.pieces[posy][posx];
+     
                     //conditional prevents user from deleteing piece of mouse is clicked and release on the same position
                     if (posy != posyfinal || posx != posxfinal) {
                         //deletes old piece position
                         chess.pieces[posy][posx] = null;
                         //ends first move/whites beginning turn
-                        whiteturn = false;
+                        //whiteturn = false;
                     }
                     //repaints board with new piece positions
-                    chess.theboard.repaint();
+                    //chess.theboard.repaint();
                     String test= possiblemoves();
-                    System.out.println(test);
+                    //System.out.println(test);
                 }
             }
-        }
+        //}
         //conditionals for all turns after first turn
+            /*
         else{
             //makes it so user can click and release on empty square without null pointer exception
-            if (Math.abs(posxfinal - posx) != 0|| Math.abs(posyfinal - posy) != 0) {
+            if (/*chess.pieces[posy][posx]!=null && (Math.abs(posxfinal - posx) != 0|| Math.abs(posyfinal - posy) != 0)) {
                 //checks if piece can move
-                if (chess.pieces[posy][posx].canMove(posx, posy, posxfinal,posyfinal)) {
+            	System.out.println(posy+" "+posx+ " "+ posyfinal+ " "+ posxfinal+ " ");
+            	System.out.println(chess.pieces[posy][posx]);
+                if (chess.pieces[posy][posx].canMove(posx, posy, posxfinal,posyfinal) && chess.pieces[posy][posx].isWhite==false) {
                     //changes position
                     chess.pieces[posyfinal][posxfinal] = chess.pieces[posy][posx];
                     //prevents user from accidentally deleting piece by clicking and releasing on same piece
                     if (posy != posyfinal || posx != posxfinal) {
                         //deletes old piece position
                         chess.pieces[posy][posx] = null;
+                        whiteturn=true;
                     }
                     //repaints boardå
-                    chess.theboard.repaint();
+                    //chess.theboard.repaint();
 
                     String test= possiblemoves();
                     //System.out.println(test);
                 }
             }
-        }
+        } 
+            */
     }
 
     public static void undomove(String moveinfo){
@@ -215,10 +261,10 @@ public class BoardMouseListener implements MouseListener{
         else if (moveinfo.charAt(4)=='Q'){
             Chess.pieces[posyfinal][posxfinal]=new Queen(true, chess);
         }
-        else if (moveinfo.charAt(4)=='k'){
+        else if (moveinfo.charAt(4)=='a'){
             Chess.pieces[posyfinal][posxfinal]=new King(false, chess);
         }
-        else if (moveinfo.charAt(4)=='K'){
+        else if (moveinfo.charAt(4)=='A'){
             Chess.pieces[posyfinal][posxfinal]=new King(true, chess);
         }
         else if (moveinfo.charAt(4)=='p'){
@@ -227,75 +273,121 @@ public class BoardMouseListener implements MouseListener{
         else if(moveinfo.charAt(4)=='P'){
             Chess.pieces[posyfinal][posxfinal]=new Pawn(true, chess);
         }
-    }
-
-    public BoardMouseListener(Chess chess) {
-        this.chess = chess;
-    }
-
-    public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-    }
-
-    public void mousePressed(MouseEvent e) {
-        //equates initial mouse/piece position with tile position on board
-        posx = e.getX() / 62;
-        posy = e.getY() / 62;
-
-    }
-
-    public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        //equates final mouse/piece position with tile position on board
-        posxfinal = e.getX() / 62;
-        posyfinal = e.getY() / 62;
-        //conditional checking to see if it's the first turn so white moves first
-        if (whiteturn == true) {
-            //makes it so you can click and release on empty square without null pointer exception
-            if (Math.abs(posxfinal - posx) != 0|| Math.abs(posyfinal - posy) != 0) {
-                //checks to see if piece can move based on initial and final coordinates, this version also only allows white to move since it is the first turn
-                if (chess.pieces[posy][posx].canMove(posx, posy, posxfinal,posyfinal)&& chess.pieces[posy][posx].isWhite == true) {
-                    //moves piece
-                    chess.pieces[posyfinal][posxfinal] = chess.pieces[posy][posx];
-                    //conditional prevents user from deleteing piece of mouse is clicked and release on the same position
-                    if (posy != posyfinal || posx != posxfinal) {
-                        //deletes old piece position
-                        chess.pieces[posy][posx] = null;
-                        //ends first move/whites beginning turn
-                        whiteturn = false;
-                    }
-                    //repaints board with new piece positions
-                    chess.theboard.repaint();
-                    String test= possiblemoves();
-                }
-            }
+        /*if (whiteturn){
+        	whiteturn=false;
         }
-        //conditionals for all turns after first turn
         else{
-            //makes it so user can click and release on empty square without null pointer exception
-            if (Math.abs(posxfinal - posx) != 0|| Math.abs(posyfinal - posy) != 0) {
-                //checks if piece can move
-                if (chess.pieces[posy][posx].canMove(posx, posy, posxfinal,posyfinal)) {
-                    //changes position
-                    chess.pieces[posyfinal][posxfinal] = chess.pieces[posy][posx];
-                    //prevents user from accidentally deleting piece by clicking and releasing on same piece
-                    if (posy != posyfinal || posx != posxfinal) {
-                        //deletes old piece position
-                        chess.pieces[posy][posx] = null;
-                    }
-                    //repaints boardå
-                    chess.theboard.repaint();
-                    String test= possiblemoves();
-                    //System.out.println(test);
-	            }
-            }
-        }
-        makemove(alphaBeta(globaldepth,1000000,-1000000,"",0));
+        	whiteturn=true;
+        }*/
+        
     }
-    public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-    }
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-    }
+
+	public BoardMouseListener(Chess chess) {
+		this.chess = chess;
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void mousePressed(MouseEvent e) {
+		//equates initial mouse/piece position with tile position on board
+		posx = e.getX() / 62;
+		posy = e.getY() / 62;
+		
+
+	}
+
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		//equates final mouse/piece position with tile position on board
+		posxfinal = e.getX() / 62;
+		posyfinal = e.getY() / 62;
+		System.out.println("The mouse released on the board");
+		//conditional checking to see if it's the first turn so white moves first
+		//if (whiteturn == true) {
+			//makes it so you can click and release on empty square without null pointer exception
+			if (Math.abs(posxfinal - posx) != 0|| Math.abs(posyfinal - posy) != 0) {
+				//checks to see if piece can move based on initial and final coordinates, this version also only allows white to move since it is the first turn
+				if (chess.pieces[posy][posx].canMove(posx, posy, posxfinal,posyfinal)&& chess.pieces[posy][posx].isWhite == true) {
+					//moves piece
+					chess.pieces[posyfinal][posxfinal] = chess.pieces[posy][posx];
+					//conditional prevents user from deleteing piece of mouse is clicked and release on the same position
+					if (posy != posyfinal || posx != posxfinal) {
+						//deletes old piece position
+						chess.pieces[posy][posx] = null;
+						System.out.println("the move was done");
+						//flipboard();
+						//ends first move/whites beginning turn
+						//whiteturn = false;
+						//flipboard();
+						//postflip(posxfinal, posyfinal);
+					}
+					//repaints board with new piece positions
+				
+				
+					
+					
+					
+				}
+			}
+			chess.theboard.repaint();
+		//}
+		//conditionals for all turns after first turn
+		/*else{
+			//makes it so user can click and release on empty square without null pointer exception
+			if (Math.abs(posxfinal - posx) != 0|| Math.abs(posyfinal - posy) != 0) {
+				//checks if piece can move
+				
+				if (chess.pieces[posy][posx].canMove(posx, posy, posxfinal,posyfinal) && chess.pieces[posy][posx].isWhite == false) {
+					//changes position
+					chess.pieces[posyfinal][posxfinal] = chess.pieces[posy][posx];
+					//prevents user from accidentally deleting piece by clicking and releasing on same piece
+					if (posy != posyfinal || posx != posxfinal) {
+						//deletes old piece position
+						chess.pieces[posy][posx] = null;
+						whiteturn=true;
+						//flipboard();
+						//postflip(posx,posy);
+						
+						
+					}
+					//repaints boardå
+					
+				
+			
+				}
+			
+		
+			}
+			
+			chess.theboard.repaint();
+				
+		}*/
+		
+		/*String Stringx=Integer.toString(posx);
+		String Stringy=Integer.toString(posy);
+		String Stringfinx=Integer.toString(posxfinal);
+		String Stringfiny=Integer.toString(posyfinal);
+		String testmove=Stringx+Stringy+Stringfinx+Stringfiny+"A";
+		undomove(testmove);*/
+		makemove(alphaBeta(globaldepth, 1000000, -1000000, "", 0));
+		
+		chess.theboard.repaint();
+		
+			
+		}
+	
+
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

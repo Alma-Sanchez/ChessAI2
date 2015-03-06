@@ -6,14 +6,13 @@ import javax.swing.JComponent;
 
 public abstract class Piece extends JComponent {
 	
-	public static String pieceletter;
 	ImageIcon img;
 	//abstract boolean determining of piece can move
 	public abstract boolean canMove(int x, int y, int finx, int finy);
 	//not used boolean
 	public abstract boolean wasPressed(int x,int y);
 	//boolean to determing color
-	boolean isWhite;
+	public static boolean isWhite;
 	//draw pieces
 	public void drawPiece(Graphics g, int x, int y){
 		g.drawImage(img.getImage(), x*62, y*62, null);
@@ -22,6 +21,7 @@ public abstract class Piece extends JComponent {
 		// TODO Auto-generated method stub
 		
 	}
+	public String pieceletter;
 
 	
 	

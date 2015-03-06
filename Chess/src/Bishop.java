@@ -82,6 +82,7 @@ public class Bishop extends Piece {
 	
 		}
 			//checking final destination to make sure it's empty or contains pieces to take
+			//System.out.println(chess.pieces[y][x].isWhite);
 		if(chess.pieces[finy][finx]==null||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite){
 			return true;
 		}
