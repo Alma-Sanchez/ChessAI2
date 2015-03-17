@@ -12,12 +12,12 @@ public class Chess{
 	//tile array
 	BoardTile[][] boardTiles;
 	//piece array
-	public static Piece [][] pieces;
+	static Piece [][] pieces;
 	//defining of board component
 	BoardComponent theboard;
 	//defining of mouse listener
 	BoardMouseListener bml;
-	
+	public static int kingPositionC, kingPositionL;
 	public Chess(){
 		//Jframe creation
 		JFrame chess;
@@ -71,6 +71,10 @@ public class Chess{
 					pieces[i][j]=new Pawn(false,this);
 				}
 			}
+			else if (i==2||i==3||i==4||i==5){
+				for (int j=0;j<8;j++)
+					pieces[i][j]= new BlankPiece();
+			}
 			else if (i==6){
 				//creates white pawns
 				for (int j=0; j<8; j++){
@@ -98,9 +102,7 @@ public class Chess{
 					}
 				
 			}
-			
 		}
-		//pieces[5][5]=new Knight (false,this);
 		//sets the windows visible and ends program if the window is closed
 		chess.setVisible(true);
 		chess.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,8 +119,35 @@ public class Chess{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//creates chess
+		 
 		new Chess();
+		String userPosibilities=BoardMouseListener.possiblemoves();
+        System.out.println("User Possibilities = "+userPosibilities);
+		for(int i=0;i<8;i++)
+			for(int j=0;j<8;j++){
+				if(Chess.pieces[i][j]!=null)
+					System.out.println(Chess.pieces[i][j].pieceletter);
+			}
+		//BoardMouseListener.flipboard();
 		
+		while (Chess.pieces[kingPositionC/8][kingPositionC%8]!=null&&(kingPositionC/8<8 && kingPositionC%8<8)&& !"A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter))
+		{
+			//System.out.println("A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter));
+			if("A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter)){
+				System.out.println("FOUND KING!!!!");
+			}
+
+					kingPositionC++;
+				
+			}
+		
+        while (Chess.pieces[kingPositionL/8][kingPositionL%8]!=null&&(kingPositionL/8<8 && kingPositionL%8<8)&& !"a".equals(pieces[kingPositionL/8][kingPositionL%8].pieceletter)) {
+
+				kingPositionL++;
+        		}
+		
+        System.out.println("kingPositionC = "+kingPositionC+" kingPositionL = "+kingPositionL);
+        
 		
 	}
 }
