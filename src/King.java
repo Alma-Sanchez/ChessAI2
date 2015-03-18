@@ -18,19 +18,19 @@ public class King extends Piece{
 	public boolean canMove(int x, int y, int finx, int finy) {
 		// TODO Auto-generated method stub
 		//move king forward and backward
-		if ((Math.abs(y-finy)==1 && Math.abs(x-finx)==0) && ( chess.pieces[finy][finx]==null||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite)){
+		if ((Math.abs(y-finy)==1 && Math.abs(x-finx)==0) && ( (" ".equals(chess.pieces[finy][finx].pieceletter))||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite)){
 		
 				return true;
 			
 		}
 		//move king side to side
-		else if ((Math.abs(x-finx)==1 && Math.abs(y-finy)==0)&&(chess.pieces[finy][finx]==null||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite)){ 
+		else if ((Math.abs(x-finx)==1 && Math.abs(y-finy)==0)&&((" ".equals(chess.pieces[finy][finx].pieceletter))||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite)){ 
 			
 				return true;
 			
 		}
 		//move king diagionally
-		else if ((Math.abs(x-finx)==1 && Math.abs(y-finy)==1) &&(chess.pieces[finy][finx]==null || chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite)){ 
+		else if ((Math.abs(x-finx)==1 && Math.abs(y-finy)==1) &&((" ".equals(chess.pieces[finy][finx].pieceletter)) || chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite)){ 
 			
 				return true;
 				//System.out.println(chess.pieces[finy][finx]+"it went through");

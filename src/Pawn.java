@@ -13,21 +13,21 @@ public class Pawn extends Piece {
 	public boolean canMove(int x, int y, int finx, int finy) {
 		// movement conditionals for white pawns
 		if (chess.pieces[y][x].isWhite) {
-			// movement conditional for white pawn upon first movement
-			//System.out.println("moved "+moved+","+x+","+y+","+finx+","+finy);
+			
 			if (y==6) {
 				// vertical movement
 				if (((x - finx) == 0) && ((y - finy) <= 2 && (y - finy) > 0)
-						&& chess.pieces[y - 1][x] == null
-						&& chess.pieces[finy][finx] == null) {
-					this.moved = true;
-					//System.out.print("Pawn should move two spaces");
+						&& (" ".equals(chess.pieces[y - 1][x].pieceletter))
+						&& (" ".equals(chess.pieces[finy][finx].pieceletter))) {
+					//this.moved = true;
+					//System.out.println("Pawn should move two spaces");
 					return true;
 					// allows pawn to take piece of opposite color even if
 					// hasn't been moved yet
-				} else if (((chess.pieces[finy][finx] != null) && (chess.pieces[y][x].isWhite != chess.pieces[finy][finx].isWhite))
+				} else if (((!(" ".equals(chess.pieces[finy][finx].pieceletter))) && (chess.pieces[y][x].isWhite != chess.pieces[finy][finx].isWhite))
 						&& (Math.abs(x - finx) == 1) && ((y - finy) == 1)) {
-					chess.pieces[finy][finx] = null;
+					//System.out.print("allows pawn to take piece of opposite color even if");
+					//chess.pieces[finy][finx] = new BlankPiece();
 					return true;
 
 				}
@@ -37,14 +37,14 @@ public class Pawn extends Piece {
 			else {
 				// vertical movement
 				if (((x - finx) == 0) && ((y - finy) == 1)
-						&& chess.pieces[finy][finx] == null) {
-
+						&& (" ".equals(chess.pieces[finy][finx].pieceletter))) {
+					//System.out.print("vertical movement");
 					return true;
 					// allows for taking of pieces diagonally
-				} else if (((chess.pieces[finy][finx] != null) && (chess.pieces[y][x].isWhite != chess.pieces[finy][finx].isWhite))
+				} else if (((!(" ".equals(chess.pieces[finy][finx].pieceletter))) && (chess.pieces[y][x].isWhite != chess.pieces[finy][finx].isWhite))
 						&& (Math.abs(x - finx) == 1) && ((y - finy) == 1)) {
 
-					chess.pieces[finy][finx] = null;
+					//chess.pieces[finy][finx] = new BlankPiece();
 					return true;
 
 				} else {
@@ -59,14 +59,14 @@ public class Pawn extends Piece {
 			if (y==1) {
 				// vertical movement
 				if (((finx - x) == 0) && ((finy - y) <= 2 && (finy - y) > 0)
-						&& chess.pieces[y + 1][x] == null
-						&& chess.pieces[y + 2][x] == null) {
+						&& (" ".equals(chess.pieces[y + 1][x].pieceletter))
+						&& (" ".equals(chess.pieces[y + 2][x].pieceletter))) {
 					this.moved = true;
 					return true;
 					// diagional movement when taking another piece
-				} else if (((chess.pieces[finy][finx] != null) && (chess.pieces[y][x].isWhite != chess.pieces[finy][finx].isWhite))
+				} else if (((!(" ".equals(chess.pieces[finy][finx].pieceletter))) && (chess.pieces[y][x].isWhite != chess.pieces[finy][finx].isWhite))
 						&& (Math.abs(finx - x) == 1) && ((finy - y) == 1)) {
-					chess.pieces[finy][finx] = null;
+					//chess.pieces[finy][finx] = new BlankPiece();
 					this.moved=true;
 					return true;
 				}
@@ -77,13 +77,13 @@ public class Pawn extends Piece {
 			else {
 				// vertical movement
 				if (((finx - x) == 0) && ((finy - y) == 1)
-						&& chess.pieces[finy][finx] == null) {
+						&& (" ".equals(chess.pieces[finy][finx].pieceletter))) {
 					return true;
 					// diagonal movement if pawn is taking another piece
-				} else if (((chess.pieces[finy][finx] != null) && (chess.pieces[y][x].isWhite != chess.pieces[finy][finx].isWhite))
+				} else if (((!(" ".equals(chess.pieces[finy][finx].pieceletter))) && (chess.pieces[y][x].isWhite != chess.pieces[finy][finx].isWhite))
 						&& (Math.abs(finx - x) == 1)
 						&& (Math.abs(finy - y) == 1)) {
-					chess.pieces[finy][finx] = null;
+					//chess.pieces[finy][finx] = new BlankPiece();
 					return true;
 				} else {
 					return false;

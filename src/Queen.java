@@ -28,14 +28,14 @@ public class Queen extends Piece {
 		if ((y - finy) > 0 && (x - finx) == 0) {
 			//scans spaces between start and finish for obstructing pieces
 			for (int i = 1; i < Math.abs(y - finy); i++) {
-				if (Chess.pieces[y - i][x] != null) {
+				if (!(" ".equals(Chess.pieces[y - i][x].pieceletter))) {
 					return false;
 
 				}
 
 			}
 			//checks to see if final piece is either null or has a takeable pieces
-			if (Chess.pieces[finy][finx] == null
+			if ((" ".equals(Chess.pieces[finy][finx].pieceletter))
 					|| Chess.pieces[finy][finx].isWhite != Chess.pieces[y][x].isWhite) {
 				return true;
 			}
@@ -44,14 +44,14 @@ public class Queen extends Piece {
 		else if ((y - finy) < 0 && (x - finx) == 0) {
 			//space scanner
 			for (int i = 1; i < Math.abs(y - finy); i++) {
-				if (Chess.pieces[y + i][x] != null) {
+				if (!(" ".equals(Chess.pieces[y + i][x].pieceletter))) {
 					return false;
 
 				}
 
 			}
 			//checks to see if final piece is either null or has a takeable pieces
-			if (Chess.pieces[finy][finx] == null
+			if ((" ".equals(Chess.pieces[finy][finx].pieceletter))
 					|| Chess.pieces[finy][finx].isWhite != Chess.pieces[y][x].isWhite) {
 				return true;
 			}
@@ -60,14 +60,14 @@ public class Queen extends Piece {
 		else if ((x - finx) > 0 && (y - finy) == 0) {
 			//space scanner
 			for (int i = 1; i < Math.abs(x - finx); i++) {
-				if (Chess.pieces[y][x - i] != null) {
+				if (!(" ".equals(Chess.pieces[y][x - i].pieceletter))) {
 					return false;
 
 				}
 
 			}
 			//checks to see if final space is either null or has a takeable piece
-			if (Chess.pieces[finy][finx] == null
+			if ((" ".equals(Chess.pieces[finy][finx].pieceletter))
 					|| Chess.pieces[finy][finx].isWhite != Chess.pieces[y][x].isWhite) {
 				return true;
 			}
@@ -76,14 +76,14 @@ public class Queen extends Piece {
 		else if ((x - finx) < 0 && (y - finy) == 0) {
 			//position scanner
 			for (int i = 1; i < Math.abs(x - finx); i++) {
-				if (Chess.pieces[y][x + i] != null) {
+				if (!(" ".equals(Chess.pieces[y][x + i].pieceletter))) {
 					return false;
 
 				}
 
 			}
 			//checks final space is either null or has a takeable piece
-			if (Chess.pieces[finy][finx] == null
+			if ((" ".equals(Chess.pieces[finy][finx].pieceletter))
 					|| Chess.pieces[finy][finx].isWhite != Chess.pieces[y][x].isWhite) {
 				return true;
 			}
@@ -92,14 +92,14 @@ public class Queen extends Piece {
 				&& Math.abs(x - finx) == Math.abs(y - finy)) {
 				//position scanner
 			for (int i = 1; i < Math.abs(x - finx); i++) {
-				if (Chess.pieces[y - i][x - i] != null) {
+				if (!(" ".equals(Chess.pieces[y - i][x - i].pieceletter))) {
 					return false;
 
 				}
 
 			}
 			//checks if final space is either null or has a takeable piece
-			if (Chess.pieces[finy][finx] == null
+			if ((" ".equals(Chess.pieces[finy][finx].pieceletter))
 					|| Chess.pieces[finy][finx].isWhite != Chess.pieces[y][x].isWhite) {
 				return true;
 			}
@@ -108,14 +108,14 @@ public class Queen extends Piece {
 				&& Math.abs(x - finx) == Math.abs(y - finy)) {
 			//space scanner
 			for (int i = 1; i < Math.abs(x - finx); i++) {
-				if (Chess.pieces[y + i][x + i] != null) {
+				if (!(" ".equals(Chess.pieces[y + i][x + i].pieceletter))) {
 					return false;
 
 				}
 
 			}
 			//final space checker
-			if (Chess.pieces[finy][finx] == null
+			if ((" ".equals(Chess.pieces[finy][finx].pieceletter))
 					|| Chess.pieces[finy][finx].isWhite != Chess.pieces[y][x].isWhite) {
 				return true;
 			}
@@ -124,14 +124,14 @@ public class Queen extends Piece {
 				&& Math.abs(x - finx) == Math.abs(y - finy)) {
 			//space scanner
 			for (int i = 1; i < Math.abs(x - finx); i++) {
-				if (Chess.pieces[y - i][x + i] != null) {
+				if (!(" ".equals(Chess.pieces[y - i][x + i].pieceletter))) {
 					return false;
 
 				}
 
 			}
 			//final space checker
-			if (Chess.pieces[finy][finx] == null
+			if ((" ".equals(Chess.pieces[finy][finx].pieceletter))
 					|| Chess.pieces[finy][finx].isWhite != Chess.pieces[y][x].isWhite) {
 				return true;
 			}
@@ -140,14 +140,14 @@ public class Queen extends Piece {
 				&& Math.abs(x - finx) == Math.abs(y - finy)) {
 			//space checker
 			for (int i = 1; i < Math.abs(x - finx); i++) {
-				if (Chess.pieces[y + i][x - i] != null) {
+				if (!(" ".equals(Chess.pieces[y + i][x - i].pieceletter))) {
 					return false;
 
 				}
 
 			}
 			//final space checker
-			if (Chess.pieces[finy][finx] == null
+			if ((" ".equals(Chess.pieces[finy][finx].pieceletter))
 					|| Chess.pieces[finy][finx].isWhite != Chess.pieces[y][x].isWhite) {
 				return true;
 			}

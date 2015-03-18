@@ -35,56 +35,56 @@ public class Rook extends Piece {
 		if ((y-finy)>0 && (x-finx)==0){ 
 			
 			for (int i=1; i<Math.abs(y-finy);i++){
-					if (Chess.pieces[y-i][x]!=null){
+					if (!(" ".equals(Chess.pieces[y-i][x].pieceletter))){
 						return false;
 					
 					}
 					
 		
 			}
-			if(Chess.pieces[finy][finx]==null||Chess.pieces[finy][finx].isWhite!=Chess.pieces[y][x].isWhite){
+			if((" ".equals(Chess.pieces[finy][finx].pieceletter))||Chess.pieces[finy][finx].isWhite!=Chess.pieces[y][x].isWhite){
 				return true;
 			}
 		}
 		//positive movement y direction
 		else if ((y-finy)<0 && (x-finx)==0){
 			for (int i=1; i<Math.abs(y-finy);i++){
-					if (Chess.pieces[y+i][x]!=null){
+					if (!(" ".equals(Chess.pieces[y+i][x].pieceletter))){
 						return false;
 					
 					}
 					
 		
 			}
-			if(Chess.pieces[finy][finx]==null||Chess.pieces[finy][finx].isWhite!=Chess.pieces[y][x].isWhite){
+			if((" ".equals(Chess.pieces[finy][finx].pieceletter))||Chess.pieces[finy][finx].isWhite!=Chess.pieces[y][x].isWhite){
 				return true;
 			}
 		}
 		//negative x movement
 		else if ((x-finx)>0 && (y-finy)==0){
 			for (int i=1; i<Math.abs(x-finx);i++){
-					if (Chess.pieces[y][x-i]!=null){
+					if (!(" ".equals(Chess.pieces[y][x-i].pieceletter))){
 						return false;
 					
 					}
 					
 		
 			}
-			if(Chess.pieces[finy][finx]==null||Chess.pieces[finy][finx].isWhite!=Chess.pieces[y][x].isWhite){
+			if((" ".equals(Chess.pieces[finy][finx].pieceletter))||Chess.pieces[finy][finx].isWhite!=Chess.pieces[y][x].isWhite){
 				return true;
 			}
 		}
 		//positive x movement
 		else if ((x-finx)<0 && (y-finy)==0){
 			for (int i=1; i<Math.abs(x-finx);i++){
-					if (Chess.pieces[y][x+i]!=null){
+					if (!(" ".equals(Chess.pieces[y][x+i].pieceletter))){
 						return false;
 					
 					}
 					
 		
 			}
-			if(Chess.pieces[finy][finx]==null||Chess.pieces[finy][finx].isWhite!=Chess.pieces[y][x].isWhite){
+			if((" ".equals(Chess.pieces[finy][finx].pieceletter))||Chess.pieces[finy][finx].isWhite!=Chess.pieces[y][x].isWhite){
 				return true;
 			}
 		}

@@ -41,7 +41,7 @@ public class Bishop extends Piece {
 		if (((x-finx)>0 && (y-finy)>0) && Math.abs(x-finx)==Math.abs(y-finy)){ 
 				// for loop that goes through tiles in movement path of piece looking for obstacles that may block movement
 				for (int i=1; i<Math.abs(x-finx);i++){
-						if (chess.pieces[y-i][x-i]!=null){
+						if (!(" ".equals(chess.pieces[y-i][x-i].pieceletter))){
 							return false;
 						
 						}
@@ -49,7 +49,7 @@ public class Bishop extends Piece {
 			
 				}
 				//if path is clear checks to see if final point is null or has a piece of opposite color to take
-				if(chess.pieces[finy][finx]==null||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite){
+				if((" ".equals(chess.pieces[finy][finx].pieceletter))||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite){
 					return true;
 				}
 		}
@@ -57,7 +57,7 @@ public class Bishop extends Piece {
 		else if (((x-finx)<0 && (y-finy)<0) && Math.abs(x-finx)==Math.abs(y-finy)){
 			//another for loop checking the movement path for obstacles
 			for (int i=1; i<Math.abs(x-finx);i++){
-				if (chess.pieces[y+i][x+i]!=null){
+				if (!(" ".equals(chess.pieces[y+i][x+i].pieceletter))){
 					return false;
 				
 				}
@@ -65,7 +65,7 @@ public class Bishop extends Piece {
 	
 		}
 			//if path is clear checks to see if final point is null or has a piece of opposite color to take
-		if(chess.pieces[finy][finx]==null||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite){
+		if((" ".equals(chess.pieces[finy][finx].pieceletter))||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite){
 			return true;
 		}
 			
@@ -74,7 +74,7 @@ public class Bishop extends Piece {
 		else if (((x-finx)<0 && (y-finy)>0) && Math.abs(x-finx)==Math.abs(y-finy)){
 			// for loop checking path
 			for (int i=1; i<Math.abs(x-finx);i++){
-				if (chess.pieces[y-i][x+i]!=null){
+				if (!(" ".equals(chess.pieces[y-i][x+i].pieceletter))){
 					return false;
 				
 				}
@@ -82,7 +82,8 @@ public class Bishop extends Piece {
 	
 		}
 			//checking final destination to make sure it's empty or contains pieces to take
-		if(chess.pieces[finy][finx]==null||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite){
+			//System.out.println(chess.pieces[y][x].isWhite);
+		if((" ".equals(chess.pieces[finy][finx].pieceletter))||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite){
 			return true;
 		}
 			
@@ -91,7 +92,7 @@ public class Bishop extends Piece {
 		else if (((x-finx)>0 && (y-finy)<0) && Math.abs(x-finx)==Math.abs(y-finy)){
 			//path checker
 			for (int i=1; i<Math.abs(x-finx);i++){
-				if (chess.pieces[y+i][x-i]!=null){
+				if (!(" ".equals(chess.pieces[y+i][x-i].pieceletter))){
 					return false;
 				
 				}
@@ -99,7 +100,7 @@ public class Bishop extends Piece {
 	
 		}
 			//final spot checker
-		if(chess.pieces[finy][finx]==null||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite){
+		if((" ".equals(chess.pieces[finy][finx].pieceletter))||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite){
 			return true;
 		}
 			
