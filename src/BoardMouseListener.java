@@ -89,7 +89,7 @@ public class BoardMouseListener implements MouseListener {
 		
 		for (int i=0; i<8; i++){
 			for (int j=0; j<8; j++){
-				if(!(" ".equals(Chess.pieces[i][j].pieceletter)))
+				if(!(" ".equals(Chess.pieces[i][j].pieceletter))&&!Chess.pieces[i][j].isWhite)
 					for (int k=0; k<8; k++){
 						for (int l=0; l<8; l++){
 							if (Chess.pieces[i][j].canMove(j, i, l ,k)){
@@ -152,9 +152,9 @@ public class BoardMouseListener implements MouseListener {
 	                Chess.kingPositionC=8*Character.getNumericValue(move.charAt(2))+Character.getNumericValue(move.charAt(3));
 	            }
 	        } else {
-	            //if pawn promotion
-	        		Chess.pieces[1][Character.getNumericValue(move.charAt(0))].pieceletter=" ";
-	        		Chess.pieces[0][Character.getNumericValue(move.charAt(1))].pieceletter=String.valueOf(move.charAt(3));
+//	            //if pawn promotion
+//	        		Chess.pieces[1][Character.getNumericValue(move.charAt(0))].pieceletter=" ";
+//	        		Chess.pieces[0][Character.getNumericValue(move.charAt(1))].pieceletter=String.valueOf(move.charAt(4));
 	        }
 	    }
 
@@ -162,13 +162,14 @@ public class BoardMouseListener implements MouseListener {
 	        if (move.charAt(4)!='P') {
 	            Chess.pieces[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))].pieceletter=Chess.pieces[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))].pieceletter;
 	            Chess.pieces[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))].pieceletter=String.valueOf(move.charAt(4));
+	            System.out.println("test "+Chess.pieces[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))].pieceletter);
 	            if ("A".equals(Chess.pieces[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))].pieceletter)) {
 	                Chess.kingPositionC=8*Character.getNumericValue(move.charAt(0))+Character.getNumericValue(move.charAt(1));
 	            }
 	        } else {
 	            //if pawn promotion
-	        		Chess.pieces[1][Character.getNumericValue(move.charAt(0))].pieceletter="P";
-	        		Chess.pieces[0][Character.getNumericValue(move.charAt(1))].pieceletter=String.valueOf(move.charAt(2));
+//	        		Chess.pieces[1][Character.getNumericValue(move.charAt(0))].pieceletter="P";
+//	        		Chess.pieces[0][Character.getNumericValue(move.charAt(1))].pieceletter=String.valueOf(move.charAt(4));
 	        }
 	    }
 	
@@ -360,7 +361,8 @@ public class BoardMouseListener implements MouseListener {
             System.out.println("User Possibilities = "+userPosibilities);
             System.out.println("Piece '"+Chess.pieces[posy][posx].pieceletter+ "' is White="+Chess.pieces[posy][posx].isWhite+" at " + posy +" "+posx+" can move "+Chess.pieces[posy][posx].canMove(posx, posy, posxfinal, posyfinal));
             String compmove;
-            if (userPosibilities.replaceAll(dragMove, "").length()<userPosibilities.length()) {
+            if (Chess.pieces[posy][posx].canMove(posx, posy, posxfinal, posyfinal)){
+            //if (userPosibilities.replaceAll(dragMove, "").length()<userPosibilities.length()) {
             		System.out.println("valid move");
                 MakeMove2(dragMove);
                 chess.theboard.repaint();
