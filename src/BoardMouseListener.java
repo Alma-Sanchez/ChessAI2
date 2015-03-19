@@ -3,11 +3,7 @@ import java.awt.event.MouseListener;
 import java.util.Scanner;
 //I am here
 public class BoardMouseListener implements MouseListener {
-<<<<<<< HEAD
-	static int globaldepth=3;
-=======
-	static int globaldepth=1;
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
+	static int globaldepth=2;
 	public static Chess chess;
 	//position of mouse
 	public static int posx, posy, posxfinal, posyfinal;
@@ -37,32 +33,8 @@ public class BoardMouseListener implements MouseListener {
             }
             if (alpha>=beta) {
                 if (player==0) {return move+beta;} else {return move+alpha;}
-<<<<<<< HEAD
-=======
             }
         }
-        if (player==0) {return move+beta;} else {return move+alpha;}
-	}
-	
-	public static String sortMoves(String list) {
-        int[] score=new int [list.length()/5];
-        for (int i=0;i<list.length();i+=5) {
-            makemove(list.substring(i, i+5));
-            score[i/5]=-Rating.rating(-1, 0);
-            undomove(list.substring(i, i+5));
-        }
-        String newListA="", newListB=list;
-        for (int i=0;i<Math.min(6, list.length()/5);i++) {//first few moves only
-            int max=-1000000, maxLocation=0;
-            for (int j=0;j<list.length()/5;j++) {
-                if (score[j]>max) {max=score[j]; maxLocation=j;}
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
-            }
-            score[maxLocation]=-1000000;
-            newListA+=list.substring(maxLocation*5,maxLocation*5+5);
-            newListB=newListB.replace(list.substring(maxLocation*5,maxLocation*5+5), "");
-        }
-<<<<<<< HEAD
         if (player==0) {return move+beta;} else {return move+alpha;}
 	}
 	
@@ -83,8 +55,6 @@ public class BoardMouseListener implements MouseListener {
             newListA+=list.substring(maxLocation*5,maxLocation*5+5);
             newListB=newListB.replace(list.substring(maxLocation*5,maxLocation*5+5), "");
         }
-=======
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
         return newListA+newListB;
     }
 	
@@ -104,6 +74,7 @@ public class BoardMouseListener implements MouseListener {
 	                        if (kingSafe()) {
 	                            list=list+r+c+(r-1+j/3)+(c-1+j%3)+oldPiece;
 	                        }
+	                        
 	                        Chess.pieces[r][c].pieceletter="A";
 	                        Chess.pieces[r-1+j/3][c-1+j%3].pieceletter=oldPiece;
 	                        Chess.kingPositionC=kingTemp;
@@ -119,11 +90,7 @@ public class BoardMouseListener implements MouseListener {
 		
 		for (int i=0; i<8; i++){
 			for (int j=0; j<8; j++){
-<<<<<<< HEAD
 				if(!(" ".equals(Chess.pieces[i][j].pieceletter))&&Chess.pieces[i][j].isWhite)/*Character.isUpperCase(Chess.pieces[i][j].pieceletter.charAt(0)))*/
-=======
-				if(!(" ".equals(Chess.pieces[i][j].pieceletter))&&!Chess.pieces[i][j].isWhite)
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
 					for (int k=0; k<8; k++){
 						for (int l=0; l<8; l++){
 							if (Chess.pieces[i][j].canMove(j, i, l ,k)){
@@ -154,7 +121,6 @@ public class BoardMouseListener implements MouseListener {
 	}
 	
 	public static void flipboard(){
-<<<<<<< HEAD
 		//This commented out section is my attempt at making a flipboard that actual switches piece objects, if we get this working our code should execute much much faster	
 		/* Piece temppiece=new BlankPiece();
 		 for (int i=0; i<32; i++){
@@ -200,25 +166,17 @@ public class BoardMouseListener implements MouseListener {
 		// this is the working, but extremely inefficient/slow flipboard. We will use this in a worst case scenario. In order to speed it up some you can change global depth to a lower number.
 		 
 		String temp="";
-=======
-		
-		 String temp="";
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
 	        for (int i=0;i<32;i++) {
 	            int r=i/8, c=i%8;
 	            if (Character.isUpperCase(Chess.pieces[r][c].pieceletter.charAt(0))) {
 	                temp=Chess.pieces[r][c].pieceletter.toLowerCase();
 	                
-<<<<<<< HEAD
 	                
-=======
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
 	            } else {
 	                temp=Chess.pieces[r][c].pieceletter.toUpperCase();
 	            }
 	            if (Character.isUpperCase(Chess.pieces[7-r][7-c].pieceletter.charAt(0))) {
 	            		Chess.pieces[r][c].pieceletter=Chess.pieces[7-r][7-c].pieceletter.toLowerCase();
-<<<<<<< HEAD
 	            		//Chess.pieces[r][c].isWhite=!Chess.pieces[r][c].isWhite;
 	            } else {
 	            		Chess.pieces[r][c].pieceletter=Chess.pieces[7-r][7-c].pieceletter.toUpperCase();
@@ -265,9 +223,12 @@ public class BoardMouseListener implements MouseListener {
 	        }
 	        	else if("A".equals(Chess.pieces[r][c].pieceletter)){
 	        		Chess.pieces[r][c]=new King(true ,chess);
+	        	
 	        }
 	        	else if("a".equals(Chess.pieces[r][c].pieceletter)){
-	        		Chess.pieces[r][c]=new King(false,chess);
+	        		
+		        		Chess.pieces[r][c]=new King(false ,chess);
+		        		
 	        }
 	        	else{
 	        		Chess.pieces[r][c]=new BlankPiece();
@@ -276,13 +237,6 @@ public class BoardMouseListener implements MouseListener {
 	        	
 	        }
 	     
-=======
-	            } else {
-	            		Chess.pieces[r][c].pieceletter=Chess.pieces[7-r][7-c].pieceletter.toUpperCase();
-	            }
-	            Chess.pieces[7-r][7-c].pieceletter=temp;
-	        }
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
 	        int kingTemp=Chess.kingPositionC;
 	        Chess.kingPositionC=63-Chess.kingPositionL;
 	        Chess.kingPositionL=63-kingTemp;
@@ -290,18 +244,13 @@ public class BoardMouseListener implements MouseListener {
 		
 	}
 	 public static void makemove(String move) {
-<<<<<<< HEAD
 	        //if (move.charAt(4)!='P') {
-=======
-	        if (move.charAt(4)!='P') {
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
 	        		//System.out.println("move is"+move+Character.getNumericValue(move.charAt(2))+Character.getNumericValue(move.charAt(3))+Character.getNumericValue(move.charAt(0))+Character.getNumericValue(move.charAt(1)));
 	            Chess.pieces[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))].pieceletter=Chess.pieces[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))].pieceletter;
 	            Chess.pieces[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))].pieceletter=" ";
 	            if ("A".equals(Chess.pieces[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))].pieceletter)) {
 	                Chess.kingPositionC=8*Character.getNumericValue(move.charAt(2))+Character.getNumericValue(move.charAt(3));
 	            }
-<<<<<<< HEAD
 	            
 	       // } else {
 //	            //if pawn promotion
@@ -312,23 +261,11 @@ public class BoardMouseListener implements MouseListener {
 
 	 public static void undomove(String move) {
 	       // if (move.charAt(4)!='P') {
-=======
-	        } else {
-//	            //if pawn promotion
-//	        		Chess.pieces[1][Character.getNumericValue(move.charAt(0))].pieceletter=" ";
-//	        		Chess.pieces[0][Character.getNumericValue(move.charAt(1))].pieceletter=String.valueOf(move.charAt(4));
-	        }
-	    }
-
-	 public static void undomove(String move) {
-	        if (move.charAt(4)!='P') {
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
 	            Chess.pieces[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))].pieceletter=Chess.pieces[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))].pieceletter;
 	            Chess.pieces[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))].pieceletter=String.valueOf(move.charAt(4));
 	            System.out.println("test "+Chess.pieces[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))].pieceletter);
 	            if ("A".equals(Chess.pieces[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))].pieceletter)) {
 	                Chess.kingPositionC=8*Character.getNumericValue(move.charAt(0))+Character.getNumericValue(move.charAt(1));
-<<<<<<< HEAD
 	            //}
 	        } //else {
 	            //if pawn promotion
@@ -339,17 +276,6 @@ public class BoardMouseListener implements MouseListener {
 	
 	public static void MakeMove2(String move){
 		System.out.println(move);
-=======
-	            }
-	        } else {
-	            //if pawn promotion
-//	        		Chess.pieces[1][Character.getNumericValue(move.charAt(0))].pieceletter="P";
-//	        		Chess.pieces[0][Character.getNumericValue(move.charAt(1))].pieceletter=String.valueOf(move.charAt(4));
-	        }
-	    }
-	
-	public static void MakeMove2(String move){
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
 		Chess.pieces[Character.getNumericValue(move.charAt(2))][Character.getNumericValue(move.charAt(3))]
 		=Chess.pieces[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))];
 		Chess.pieces[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=new BlankPiece();
@@ -455,15 +381,11 @@ public class BoardMouseListener implements MouseListener {
 		if (e.getX()<8*62 &&e.getY()<8*62) {
 			posx = e.getX() / 62;
 			posy = e.getY() / 62;
-<<<<<<< HEAD
 			System.out.println("valid press"+" "+Chess.pieces[posy][posx].isWhite);
-=======
-			System.out.println("valid press");
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
 		}
 
 	}
-	public void MakeHumanMove(){
+	/*public void MakeHumanMove(){
 		
 			if (Math.abs(posxfinal - posx) != 0|| Math.abs(posyfinal - posy) != 0) {
 				//checks to see if piece can move based on initial and final coordinates, this version also only allows white to move since it is the first turn
@@ -506,7 +428,7 @@ public class BoardMouseListener implements MouseListener {
 				}
 			}
 	}
-	}
+	}*/
 
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -521,14 +443,14 @@ public class BoardMouseListener implements MouseListener {
 			
 		
             String dragMove;
-            if (posyfinal==0 && posy==1 && "P".equals(Chess.pieces[posy][posx].pieceletter)) {
+            /*if (posyfinal==0 && posy==1 && "P".equals(Chess.pieces[posy][posx].pieceletter)) {
                 //pawn promotion
                 dragMove=""+posx+posxfinal+Chess.pieces[posyfinal][posxfinal].pieceletter+"QP";
-            } else {
+            } else {*/
                 //regular move
                 dragMove=""+posy+posx+posyfinal+posxfinal+Chess.pieces[posyfinal][posxfinal].pieceletter;
                 //System.out.println("regular drag move = "+ dragMove);
-            }
+           // }
             for(int i=0;i<8;i++)
     			for(int j=0;j<8;j++){				
     					System.out.print(Chess.pieces[i][j].pieceletter);
@@ -543,27 +465,20 @@ public class BoardMouseListener implements MouseListener {
             String compmove;
             if (Chess.pieces[posy][posx].canMove(posx, posy, posxfinal, posyfinal)){
             //if (userPosibilities.replaceAll(dragMove, "").length()<userPosibilities.length()) {
-<<<<<<< HEAD
             	System.out.println("valid move");
-=======
-            		System.out.println("valid move");
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
-                MakeMove2(dragMove);
+            	
+            	MakeMove2(dragMove);
+            	
                 chess.theboard.repaint();
                 flipboard();
                 compmove=alphaBeta(globaldepth, 1000000, -1000000, "", 0);
                 System.out.println("Computer move = "+compmove+" can move = "+Chess.pieces[Character.getNumericValue(compmove.charAt(0))][Character.getNumericValue(compmove.charAt(1))].canMove(Character.getNumericValue(compmove.charAt(0)), Character.getNumericValue(compmove.charAt(1)), Character.getNumericValue(compmove.charAt(2)), Character.getNumericValue(compmove.charAt(3))));
                 MakeMove2(compmove);  
                 flipboard();
-<<<<<<< HEAD
                 
                 //chess.theboard.repaint();
             }
             chess.theboard.repaint();
-=======
-                chess.theboard.repaint();
-            }
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
             for(int i=0;i<8;i++)
     			for(int j=0;j<8;j++){				
     					System.out.print(Chess.pieces[i][j].pieceletter);
@@ -571,10 +486,31 @@ public class BoardMouseListener implements MouseListener {
     						System.out.println();
     			}
     			}
+            //Chess.kingPositionC=0;
+            //Chess.kingPositionL=0;
+           /* while ( !"A".equals(Chess.pieces[Chess.kingPositionC/8][Chess.kingPositionC%8].pieceletter))
+    		{
+    			//System.out.println("A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter));
+    			/*if("A".equals(Chess.pieces[Chess.kingPositionC/8][Chess.kingPositionC%8].pieceletter)){
+    				System.out.println("FOUND KING!!!!");
+    			}
+
+    					Chess.kingPositionC++;
+    				
+    			}
+    		
+            while (!"a".equals(Chess.pieces[Chess.kingPositionL/8][Chess.kingPositionL%8].pieceletter)) {
+
+    				Chess.kingPositionL++;
+            		}*/
+    		
+            System.out.println("kingPositionC = "+Chess.kingPositionC+" kingPositionL = "+Chess.kingPositionL);
+            
+    		
+    	}
             
             
         
-<<<<<<< HEAD
 		
 		
 			
@@ -582,23 +518,10 @@ public class BoardMouseListener implements MouseListener {
 			
 		
 				
-	}
+	
 
 		
 			
-=======
-		
-		
-			
-			
-			
-		
-				
-	}
-
-		
-			
->>>>>>> b14820b648cb4be2da6ddcc6d7f23c46ec18b63a
 		
 	
 

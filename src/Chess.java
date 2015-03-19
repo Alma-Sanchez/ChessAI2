@@ -130,7 +130,7 @@ public class Chess{
 			}
 		//BoardMouseListener.flipboard();
 		
-		while (Chess.pieces[kingPositionC/8][kingPositionC%8]!=null&&(kingPositionC/8<8 && kingPositionC%8<8)&& !"A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter))
+		while (/*(kingPositionC/8<8 && kingPositionC%8<8)&&*/ !"A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter))
 		{
 			//System.out.println("A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter));
 			if("A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter)){
@@ -141,7 +141,7 @@ public class Chess{
 				
 			}
 		
-        while (Chess.pieces[kingPositionL/8][kingPositionL%8]!=null&&(kingPositionL/8<8 && kingPositionL%8<8)&& !"a".equals(pieces[kingPositionL/8][kingPositionL%8].pieceletter)) {
+        while (/*(kingPositionL/8<8 && kingPositionL%8<8)&&*/ !"a".equals(pieces[kingPositionL/8][kingPositionL%8].pieceletter)) {
 
 				kingPositionL++;
         		}

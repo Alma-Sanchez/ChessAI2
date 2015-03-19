@@ -11,6 +11,29 @@ public class King extends Piece{
 		return false;
 	
 		}
+	public static String posibleA(int i) {
+        String list="";
+        int r=i/8, c=i%8;
+        for (int j=0;j<9;j++) {
+            if (j!=4) {
+                try {
+                    if (Chess.pieces[r][c].canMove(r,c, r-1+j/3, c-1+j%3)) {
+                    	
+                     
+                        if (BoardMouseListener.kingSafe()) {
+                            list=list+r+c+(r-1+j/3)+(c-1+j%3)+Chess.pieces[r-1+j/3][c-1+j%3].pieceletter;
+                        }
+                        
+                        
+                    }
+                } catch (Exception e) {}
+            }
+           
+            
+        }
+        //need to add casting later
+        return list;
+    }
 
 	
 
@@ -47,7 +70,7 @@ public class King extends Piece{
 	public King(boolean isWhite, Chess chess) {
 		// TODO Auto-generated constructor stub
 		//set king color
-		this.isWhite=isWhite;
+		//this.isWhite=isWhite;
 		this.chess=chess;
 		if (isWhite){
 			img=new ImageIcon ("wking.gif");
