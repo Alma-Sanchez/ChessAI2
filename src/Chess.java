@@ -129,7 +129,7 @@ public class Chess{
 					System.out.println(Chess.pieces[i][j].pieceletter);
 			}
 		//BoardMouseListener.flipboard();
-		
+		//searches for the kings in the array and stores there positions in two separate integers.
 		while (/*(kingPositionC/8<8 && kingPositionC%8<8)&&*/ !"A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter))
 		{
 			//System.out.println("A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter));
