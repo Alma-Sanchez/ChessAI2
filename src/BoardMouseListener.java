@@ -59,32 +59,7 @@ public class BoardMouseListener implements MouseListener {
     }
 	
 	
-	 public static String posibleA(int i) {
-	        String list="", oldPiece;
-	        int r=i/8, c=i%8;
-	        for (int j=0;j<9;j++) {
-	            if (j!=4) {
-	                try {
-	                    if (Character.isLowerCase(Chess.pieces[r-1+j/3][c-1+j%3].pieceletter.charAt(0)) || " ".equals(Chess.pieces[r-1+j/3][c-1+j%3].pieceletter)) {
-	                        oldPiece=Chess.pieces[r-1+j/3][c-1+j%3].pieceletter;
-	                        Chess.pieces[r][c].pieceletter=" ";
-	                        Chess.pieces[r-1+j/3][c-1+j%3].pieceletter="A";
-	                        int kingTemp=Chess.kingPositionC;
-	                        Chess.kingPositionC=i+(j/3)*8+j%3-9;
-	                        if (kingSafe()) {
-	                            list=list+r+c+(r-1+j/3)+(c-1+j%3)+oldPiece;
-	                        }
-	                        
-	                        Chess.pieces[r][c].pieceletter="A";
-	                        Chess.pieces[r-1+j/3][c-1+j%3].pieceletter=oldPiece;
-	                        Chess.kingPositionC=kingTemp;
-	                    }
-	                } catch (Exception e) {}
-	            }
-	        }
-	        //need to add casting later
-	        return list;
-	    }
+	
 	public static String possiblemoves(){
 		String themoves="";
 		
@@ -281,6 +256,7 @@ public class BoardMouseListener implements MouseListener {
 		Chess.pieces[Character.getNumericValue(move.charAt(0))][Character.getNumericValue(move.charAt(1))]=new BlankPiece();
 	}
 	
+	//This was a check function we sourced from LogicCrazy. Unfortunately due to time constraints we weren't able to implement it into our engine properly.
 	public static boolean kingSafe(){
 		int temp=1;
 		for(int i=-1;i<=1;i+=2){
