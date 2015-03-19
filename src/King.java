@@ -35,6 +35,25 @@ public class King extends Piece{
         //need to add casting later
         return list;
     }
+    static void updatekingposition(){
+		int kingPositionC=0;
+		int kingPositionL=0;
+				
+		while (!"A".equals(Chess.pieces[kingPositionC/8][kingPositionC%8].pieceletter))
+		{
+			//System.out.println("A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter));
+					kingPositionC++;
+				
+			}
+		while ( !"a".equals(Chess.pieces[kingPositionL/8][kingPositionL%8].pieceletter)) {
+
+			kingPositionL++;
+    		}
+		Chess.kingPositionC=kingPositionC;
+		Chess.kingPositionL=kingPositionL;
+		System.out.println("kingPositionC = "+Chess.kingPositionC+" kingPositionL = "+Chess.kingPositionL);
+	}
+
 
 	
 
