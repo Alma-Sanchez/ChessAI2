@@ -38,8 +38,6 @@ public class Chess{
 			for (int j=0; j<8; j++){
 				boardTiles[i][j]=new BoardTile();
 			}
-			
-			
 		}
 		//creating 2d piece array
 		pieces=new Piece[8][8];
@@ -105,21 +103,12 @@ public class Chess{
 		}
 		//sets the windows visible and ends program if the window is closed
 		chess.setVisible(true);
-		chess.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
-	
-		
-		
-		
-		
+		chess.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 	}
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		//creates chess
-		 
 		new Chess();
 		String userPosibilities=BoardMouseListener.possiblemoves();
         System.out.println("User Possibilities = "+userPosibilities);
@@ -136,20 +125,11 @@ public class Chess{
 			if("A".equals(pieces[kingPositionC/8][kingPositionC%8].pieceletter)){
 				System.out.println("FOUND KING!!!!");
 			}
-
-					kingPositionC++;
-				
-			}
-		
+			kingPositionC++;	
+		}	
         while (/*(kingPositionL/8<8 && kingPositionL%8<8)&&*/ !"a".equals(pieces[kingPositionL/8][kingPositionL%8].pieceletter)) {
-
 				kingPositionL++;
-        		}
-		
-        System.out.println("kingPositionC = "+kingPositionC+" kingPositionL = "+kingPositionL);
-        
-		
+        }	
+        System.out.println("kingPositionC = "+kingPositionC+" kingPositionL = "+kingPositionL);	
 	}
 }
-
-	

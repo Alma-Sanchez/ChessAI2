@@ -12,8 +12,7 @@ public class Pawn extends Piece {
 
 	public boolean canMove(int x, int y, int finx, int finy) {
 		// movement conditionals for white pawns
-		if (chess.pieces[y][x].isWhite) {
-			
+		if (chess.pieces[y][x].isWhite) {	
 			if (y==6) {
 				// vertical movement
 				if (((x - finx) == 0) && ((y - finy) <= 2 && (y - finy) > 0)
@@ -88,11 +87,8 @@ public class Pawn extends Piece {
 				} else {
 					return false;
 				}
-
 			}
-
 		}
-
 	}
 
 	public Pawn(boolean isWhite, Chess chess) {
@@ -111,8 +107,5 @@ public class Pawn extends Piece {
 
 	@Override
 	void drawPiece() {
-		// TODO Auto-generated method stub
-
 	}
-
 }

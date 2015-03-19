@@ -3,9 +3,7 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
-
 public abstract class Piece extends JComponent {
-	
 	ImageIcon img;
 	//abstract boolean determining of piece can move
 	public abstract boolean canMove(int x, int y, int finx, int finy);
@@ -20,11 +18,6 @@ public abstract class Piece extends JComponent {
 	}
 	void drawPiece() {
 		// TODO Auto-generated method stub
-		
 	}
 	public String pieceletter;
-
-	
-	
 }
-

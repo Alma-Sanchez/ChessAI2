@@ -1,6 +1,5 @@
 import javax.swing.ImageIcon;
 
-
 public class Knight extends Piece{
 	//constructor
 	public Knight(boolean isWhite, Chess chess){
@@ -9,7 +8,6 @@ public class Knight extends Piece{
 		if (isWhite){
 			img=new ImageIcon ("wknight.gif");
 			pieceletter="K";
-			
 		}
 		else 
 		{
@@ -18,22 +16,18 @@ public class Knight extends Piece{
 		}
 	}
 
-
 	@Override
 	void drawPiece() {
-		// TODO Auto-generated method stub
-		
 	}
+	
 	@Override
 	public boolean canMove(int x, int y, int finx, int finy) {
-		// TODO Auto-generated method stub
 		//movement conditional statement
 		if (Math.abs(y-finy)==1 && Math.abs(x-finx)==2){
 			if((" ".equals(Chess.pieces[finy][finx].pieceletter))||Chess.pieces[finy][finx].isWhite!=Chess.pieces[y][x].isWhite){
 				return true;
-			}
-			else{
-			return false;
+			}else{
+				return false;
 			}
 		}
 		else if (Math.abs(y-finy)==2 && Math.abs (x-finx)==1){
@@ -41,11 +35,9 @@ public class Knight extends Piece{
 				return true;
 			}
 			else{
-			return false;
+				return false;
 			}
-		}
-		else 
-		{
+		}else{
 			return false;
 		}
 	}
@@ -58,8 +50,6 @@ public class Knight extends Piece{
 		return false;*/
 	@Override
 	public boolean wasPressed(int x, int y) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

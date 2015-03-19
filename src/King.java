@@ -1,16 +1,12 @@
 import javax.swing.ImageIcon;
 
-
 public class King extends Piece{
 	Chess chess;
 
-	
-
-
 	public boolean wasPressed(int clickx, int clicky) {
 		return false;
+	}
 	
-		}
 	//Function that the rating class uses to determine score in relation to King. Creates a list of safe moves the king can make in order to avoid check.
 	public static String posibleA(int i) {
         String list="";
@@ -19,18 +15,12 @@ public class King extends Piece{
             if (j!=4) {
                 try {
                     if (Chess.pieces[r][c].canMove(r,c, r-1+j/3, c-1+j%3)) {
-                    	
-                     
                         if (BoardMouseListener.kingSafe()) {
                             list=list+r+c+(r-1+j/3)+(c-1+j%3)+Chess.pieces[r-1+j/3][c-1+j%3].pieceletter;
                         }
-                        
-                        
                     }
                 } catch (Exception e) {}
             }
-           
-            
         }
         //need to add casting later
         return list;
@@ -54,39 +44,26 @@ public class King extends Piece{
 		System.out.println("kingPositionC = "+Chess.kingPositionC+" kingPositionL = "+Chess.kingPositionL);
 	}
 
-
-	
-
-
+    //determines if the king is being moved to a legal spot
 	public boolean canMove(int x, int y, int finx, int finy) {
-		// TODO Auto-generated method stub
 		//move king forward and backward
 		if ((Math.abs(y-finy)==1 && Math.abs(x-finx)==0) && ( (" ".equals(chess.pieces[finy][finx].pieceletter))||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite)){
-		
-				return true;
-			
+				return true;	
 		}
 		//move king side to side
-		else if ((Math.abs(x-finx)==1 && Math.abs(y-finy)==0)&&((" ".equals(chess.pieces[finy][finx].pieceletter))||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite)){ 
-			
-				return true;
-			
+		else if ((Math.abs(x-finx)==1 && Math.abs(y-finy)==0)&&((" ".equals(chess.pieces[finy][finx].pieceletter))||chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite)){ 		
+				return true;	
 		}
 		//move king diagionally
 		else if ((Math.abs(x-finx)==1 && Math.abs(y-finy)==1) &&((" ".equals(chess.pieces[finy][finx].pieceletter)) || chess.pieces[finy][finx].isWhite!=chess.pieces[y][x].isWhite)){ 
-			
 				return true;
 				//System.out.println(chess.pieces[finy][finx]+"it went through");
 		}
-			
 		return false;
 	}
-
-
-	void drawPiece() {
-		// TODO Auto-generated method stub
-		
+	void drawPiece(){
 	}
+	
 	public King(boolean isWhite, Chess chess) {
 		// TODO Auto-generated constructor stub
 		//set king color
@@ -95,10 +72,7 @@ public class King extends Piece{
 		if (isWhite){
 			img=new ImageIcon ("wking.gif");
 			pieceletter="A";
-			
-		}
-		else 
-		{
+		}else{
 			img=new ImageIcon ("bking.gif");
 			pieceletter="a";
 		}
