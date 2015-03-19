@@ -75,7 +75,10 @@ public class BoardMouseListener implements MouseListener {
 								String lstring=Integer.toString(l);
 								if (!" ".equals(Chess.pieces[k][l].pieceletter)){
 									String newmove=istring+jstring+kstring+lstring+Chess.pieces[k][l].pieceletter;
+									if (!"A".equals(Chess.pieces[k][l].pieceletter) && !"a".equals(Chess.pieces[k][l].pieceletter)){
 									themoves+=newmove;	
+									}
+										
 								}
 								else{
 									String newmove=istring+jstring+kstring+lstring+" ";	
