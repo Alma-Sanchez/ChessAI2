@@ -450,6 +450,7 @@ public class BoardMouseListener implements MouseListener {
             	System.out.println("valid move");
             	
             	MakeMove2(dragMove);
+            	King.updatekingposition();
             	
                 chess.theboard.repaint();
                 flipboard();
@@ -457,6 +458,7 @@ public class BoardMouseListener implements MouseListener {
                 System.out.println("Computer move = "+compmove+" can move = "+Chess.pieces[Character.getNumericValue(compmove.charAt(0))][Character.getNumericValue(compmove.charAt(1))].canMove(Character.getNumericValue(compmove.charAt(0)), Character.getNumericValue(compmove.charAt(1)), Character.getNumericValue(compmove.charAt(2)), Character.getNumericValue(compmove.charAt(3))));
                 MakeMove2(compmove);  
                 flipboard();
+                King.updatekingposition();
                 
                 //chess.theboard.repaint();
             }
