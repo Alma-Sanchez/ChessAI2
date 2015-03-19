@@ -13,7 +13,7 @@ public class BoardMouseListener implements MouseListener {
 	
 		//get King's location
     //while (!'a'.equals(chessBoard[kingPositionL/8][kingPositionL%8])) {kingPositionL++;}//get king's location
-	
+//our AlphaBeta decision making functionfunction. The heart of our chess AI. Based off the function provided by logiccrazy.   	
 	public static String alphaBeta(int depth, int beta, int alpha, String move, int player) {
 		String list=possiblemoves();
         if (depth==0 || list.length()==0) {return move+(Rating.rating(list.length(), depth)*(player*2-1));}
@@ -59,7 +59,7 @@ public class BoardMouseListener implements MouseListener {
     }
 	
 	
-	
+	//Compiles a string of possible moves for AlphaBeta algorithm to go through.
 	public static String possiblemoves(){
 		String themoves="";
 		
@@ -94,7 +94,7 @@ public class BoardMouseListener implements MouseListener {
 		}
 		return themoves;
 	}
-	
+	//flips the board around.
 	public static void flipboard(){
 		//This commented out section is my attempt at making a flipboard that actual switches piece objects, if we get this working our code should execute much much faster	
 		/* Piece temppiece=new BlankPiece();
@@ -138,7 +138,9 @@ public class BoardMouseListener implements MouseListener {
 			 Chess.pieces[7-r][7-c]=temppiece;
 		 }*/
 		
-		// this is the working, but extremely inefficient/slow flipboard. We will use this in a worst case scenario. In order to speed it up some you can change global depth to a lower number.
+		
+		
+		// this is the working, but extremely inefficient/slow flipboard.  In order to speed it up some you can change global depth to a lower number, but that limits how "intelligent" the AI is.
 		 
 		String temp="";
 	        for (int i=0;i<32;i++) {
@@ -160,6 +162,7 @@ public class BoardMouseListener implements MouseListener {
 	            Chess.pieces[7-r][7-c].pieceletter=temp;
 	            //Chess.pieces[7-r][7-c].isWhite=!Chess.pieces[7-r][7-c].isWhite;
 	        }
+	        //for loops that repopulates the board based on pieceletter positions in the two dimensional array
 	        for (int i=0;i<64;i++){
 	        	int r=i/8, c=i%8;
 	        	if ("P".equals(Chess.pieces[r][c].pieceletter)){
@@ -455,6 +458,7 @@ public class BoardMouseListener implements MouseListener {
                 //chess.theboard.repaint();
             }
             chess.theboard.repaint();
+            //for loop that prints out the loations of pieceletters in our two dimensional chessboard array
             for(int i=0;i<8;i++)
     			for(int j=0;j<8;j++){				
     					System.out.print(Chess.pieces[i][j].pieceletter);
@@ -479,7 +483,7 @@ public class BoardMouseListener implements MouseListener {
 
     				Chess.kingPositionL++;
             		}*/
-    		
+    		//reports king position	
             System.out.println("kingPositionC = "+Chess.kingPositionC+" kingPositionL = "+Chess.kingPositionL);
             
     		
