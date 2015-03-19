@@ -11,6 +11,7 @@ public class King extends Piece{
 		return false;
 	
 		}
+	//Function that the rating class uses to determine score in relation to King. Creates a list of safe moves the king can make in order to avoid check.
 	public static String posibleA(int i) {
         String list="";
         int r=i/8, c=i%8;
